@@ -3,13 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REMCCG.Application", "REMCCG.Application\REMCCG.Application.csproj", "{80E8A5E2-FD1F-4D38-88EC-536D9966333B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "REMCCG.Application", "REMCCG.Application\REMCCG.Application.csproj", "{80E8A5E2-FD1F-4D38-88EC-536D9966333B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{58EF9036-169E-43F1-B07F-942A8DA42029} = {58EF9036-169E-43F1-B07F-942A8DA42029}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REMCCG.Infrastructure", "REMCCG.Persistence\REMCCG.Infrastructure.csproj", "{A3156D66-1599-4B14-9A32-29D728F35AB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "REMCCG.Infrastructure", "REMCCG.Persistence\REMCCG.Infrastructure.csproj", "{A3156D66-1599-4B14-9A32-29D728F35AB6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{80E8A5E2-FD1F-4D38-88EC-536D9966333B} = {80E8A5E2-FD1F-4D38-88EC-536D9966333B}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REMCCG.Presentation", "REMCCG.Presentation\REMCCG.Presentation.csproj", "{B013C90A-D19E-48E4-B80F-A0E33DE3082B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "REMCCG.Domain", "REMCCG.Domain\REMCCG.Domain.csproj", "{58EF9036-169E-43F1-B07F-942A8DA42029}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REMCCG.Domain", "REMCCG.Domain\REMCCG.Domain.csproj", "{58EF9036-169E-43F1-B07F-942A8DA42029}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REMCCG.Presentation", "REMCCG.Presentation\REMCCG.Presentation.csproj", "{5671C846-8F4B-405E-927B-B80ECF0DD4E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +31,14 @@ Global
 		{A3156D66-1599-4B14-9A32-29D728F35AB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3156D66-1599-4B14-9A32-29D728F35AB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3156D66-1599-4B14-9A32-29D728F35AB6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B013C90A-D19E-48E4-B80F-A0E33DE3082B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B013C90A-D19E-48E4-B80F-A0E33DE3082B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B013C90A-D19E-48E4-B80F-A0E33DE3082B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B013C90A-D19E-48E4-B80F-A0E33DE3082B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{58EF9036-169E-43F1-B07F-942A8DA42029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{58EF9036-169E-43F1-B07F-942A8DA42029}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58EF9036-169E-43F1-B07F-942A8DA42029}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58EF9036-169E-43F1-B07F-942A8DA42029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5671C846-8F4B-405E-927B-B80ECF0DD4E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5671C846-8F4B-405E-927B-B80ECF0DD4E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5671C846-8F4B-405E-927B-B80ECF0DD4E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5671C846-8F4B-405E-927B-B80ECF0DD4E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
