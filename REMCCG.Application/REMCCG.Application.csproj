@@ -7,41 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\DTOs\" />
-    <Folder Include="Common\Exceptions\" />
-    <Folder Include="Common\Constants\" />
     <Folder Include="Common\Helpers\" />
     <Folder Include="Common\Mappings\" />
     <Folder Include="Extentions\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Implementations\Departments\" />
-    <Folder Include="Implementations\BlogPosts\" />
-    <Folder Include="Implementations\AttendanceRecords\" />
-    <Folder Include="Implementations\ImageGalleryImages\" />
-    <Folder Include="Implementations\ImageGallerys\" />
-    <Folder Include="Implementations\Members\" />
-    <Folder Include="Implementations\Memberships\" />
-    <Folder Include="Implementations\FunctionalDepartments\" />
-    <Folder Include="Implementations\Expenses\" />
-    <Folder Include="Implementations\UserActivities\" />
-    <Folder Include="Implementations\ServiceAttendances\" />
-    <Folder Include="Implementations\Remittances\" />
-    <Folder Include="Implementations\Reports\" />
-    <Folder Include="Implementations\ServiceAssignments\" />
-    <Folder Include="Interfaces\AttendanceRecords\" />
-    <Folder Include="Interfaces\BlogPosts\" />
-    <Folder Include="Interfaces\Departments\" />
-    <Folder Include="Interfaces\Expenses\" />
-    <Folder Include="Interfaces\FunctionalDepartments\" />
-    <Folder Include="Interfaces\ImageGalleryImages\" />
-    <Folder Include="Interfaces\ImageGallerys\" />
-    <Folder Include="Interfaces\Memberships\" />
-    <Folder Include="Interfaces\Members\" />
-    <Folder Include="Interfaces\Remittances\" />
-    <Folder Include="Interfaces\Reports\" />
-    <Folder Include="Interfaces\ServiceAssignments\" />
-    <Folder Include="Interfaces\ServiceAttendances\" />
-    <Folder Include="Interfaces\UserActivities\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
   </ItemGroup>
 
 </Project>

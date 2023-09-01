@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\REMCCG.Application\REMCCG.Application.csproj" />
+    <ProjectReference Include="..\REMCCG.Persistence\REMCCG.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
