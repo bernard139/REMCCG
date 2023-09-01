@@ -1,4 +1,4 @@
-namespace REMCCG.Application.Models
+namespace REMCCG.Application.Common.Models
 {
     public class ErrorViewModel
     {

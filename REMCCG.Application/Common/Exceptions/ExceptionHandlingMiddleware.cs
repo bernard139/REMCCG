@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System.Net.Http;
-using System.Net;
+﻿using System.Net;
 using REMCCG.Application.Common.Constants.ErrorBuilds;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using REMCCG.Application.Common.Models;
+using Newtonsoft.Json;
+using REMCCG.Application.Interfaces;
 
 namespace REMCCG.Application.Common.Exceptions
 {
