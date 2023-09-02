@@ -1,17 +1,30 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace REMCCG.Domain.Entities
 {
-    public class ApplicationUser
+    public partial class ApplicationUser : IdentityUser<string>
     {
-        public int ID { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
-        public string Role { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime DOB { get; set; }
+
+        public DateTime DateCreated { get; set; }
+        [DefaultValue(true)]
+        public bool IsActive { get; set; }
+        [DefaultValue(false)]
+        public bool IsDeleted { get; set; }
+        public int LoginCount { get; set; }
+        public long CountryId { get; set; }
+        [DefaultValue(true)]
+        public bool CanRestPassword { get; set; }
     }
 }

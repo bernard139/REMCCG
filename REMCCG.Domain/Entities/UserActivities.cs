@@ -11,7 +11,7 @@ namespace REMCCG.Domain.Entities
         public string UserId { get; set; }
         public bool IsActivityResult { get; set; }
         public string Activity { get; set; }
-        public long? CountryId { get; set; }
+        //public long? CountryId { get; set; }
         public string Action { get; set; }
     }
 }
