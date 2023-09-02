@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.ServiceAttendances
 {
-    public class IServiceAttendanceService
+    public interface IServiceAttendanceService
     {
     }
 }

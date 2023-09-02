@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace REMCCG.Application.Interfaces.Memberships
+namespace REMCCG.Application.Interfaces.Expenses
 {
-    public class IMemebershipService
+    public interface IExpenseService
     {
     }
 }

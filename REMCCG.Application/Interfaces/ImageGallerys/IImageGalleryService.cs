@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.ImageGallerys
 {
-    public class IImageGalleryService
+    public interface IImageGalleryService
     {
     }
 }

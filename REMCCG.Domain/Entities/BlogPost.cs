@@ -8,16 +8,13 @@ namespace REMCCG.Domain.Entities
 {
     public class Blogpost
     {
-        public class BlogPost
-        {
             public int ID { get; set; }
             public string Title { get; set; }
             public string Content { get; set; }
             public DateTime Date { get; set; }
-            public string ImagePath { get; set; } // Path to the blog post image
-            public string AuthorId { get; set; } // ApplicationUser Id for the author
-            public ApplicationUser Author { get; set; } // Navigation property for the author
-        }
+            public string ImagePath { get; set; }
+            public string AuthorId { get; set; }
+            public ApplicationUser Author { get; set; }
 
     }
 }

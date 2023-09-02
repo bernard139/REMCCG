@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.Remittances
 {
-    public class IRemittanceService
+    public interface IRemittanceService
     {
     }
 }

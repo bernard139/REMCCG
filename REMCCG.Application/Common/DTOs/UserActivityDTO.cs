@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace REMCCG.Application.Interfaces.Expenses
+namespace REMCCG.Application.Common.DTOs
 {
-    public class IExpensesService
+    public class UserActivityDTO
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.ServiceAssignments
 {
-    public class IServiceAssignmentService
+    public interface IServiceAssignmentService
     {
     }
 }

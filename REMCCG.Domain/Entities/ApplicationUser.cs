@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +15,7 @@ namespace REMCCG.Domain.Entities
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime DOB { get; set; }
+        public string Password { get; set; }
 
         public DateTime DateCreated { get; set; }
         [DefaultValue(true)]
@@ -23,7 +23,6 @@ namespace REMCCG.Domain.Entities
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }
         public int LoginCount { get; set; }
-        public long CountryId { get; set; }
         [DefaultValue(true)]
         public bool CanRestPassword { get; set; }
     }

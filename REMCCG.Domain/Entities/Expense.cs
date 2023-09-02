@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Domain.Entities
 {
-    public class Expenses
+    public class Expense
     {
         public int ID { get; set; }
         public string Description { get; set; }

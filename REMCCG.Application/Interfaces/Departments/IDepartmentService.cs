@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.Departments
 {
-    public class IDepartmentService
+    public interface IDepartmentService
     {
     }
 }

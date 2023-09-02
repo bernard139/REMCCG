@@ -15,7 +15,7 @@ namespace REMCCG.Application.Interfaces
         public DbSet<AttendanceRecord> AttendanceRecords { get; set; }
         public DbSet<Blogpost> BlogPosts { get; set; }
         public DbSet<Department> Departments { get; set; }
-        public DbSet<Expenses> Expenses { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<FunctionalDepartment> FunctionalDepartments { get; set; }
         public DbSet<ImageGallery> ImageGalleries { get; set; }
@@ -25,7 +25,7 @@ namespace REMCCG.Application.Interfaces
         public DbSet<Remittance> Remittances { get; set; }
         public DbSet<ServiceAssignment> ServiceAssignments { get; set; }
         public DbSet<ServiceAttendance> ServiceAttendances { get; set; }
-        public DbSet<UserActivities> UserActivities { get; set; }
+        public DbSet<UserActivity> UserActivities { get; set; }
 
 
         #endregion

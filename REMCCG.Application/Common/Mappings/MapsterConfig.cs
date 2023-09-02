@@ -1,4 +1,7 @@
 ﻿using Mapster;
+using Microsoft.Extensions.DependencyInjection;
+using REMCCG.Application.Common.DTOs;
+using REMCCG.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +17,7 @@ namespace REMCCG.Application.Common.Mappings
         {
             #region   the mappings start here
 
-            TypeAdapterConfig<ApplicationUser, ApplicationUserDto>
+            TypeAdapterConfig<ApplicationUser, UserDTO>
                 .NewConfig()
                 .Map(dest => dest.UserId, src => src.Id);
 

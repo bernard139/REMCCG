@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.Members
 {
-    public class IMemberService
+    public interface IMemberService
     {
     }
 }

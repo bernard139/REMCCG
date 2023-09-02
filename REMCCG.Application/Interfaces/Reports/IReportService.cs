@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.Reports
 {
-    public class IReportService
+    public interface IReportService
     {
     }
 }

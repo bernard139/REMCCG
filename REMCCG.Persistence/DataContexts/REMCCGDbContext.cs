@@ -28,12 +28,14 @@ namespace REMCCG.Infrastructure.DataContexts
         }
 
         #region Tables
+        public virtual DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
+        public virtual DbSet<Sessions> Sessions { get; set; }
         public virtual DbSet<ApplicationUser> Users { get; set; }
-        //public DbSet<ApplicationRole> Roles { get; set; }
+        public DbSet<ApplicationRole> Roles { get; set; }
         public virtual DbSet<AttendanceRecord> AttendanceRecords { get; set; }
         public virtual DbSet<Blogpost> BlogPosts { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
-        public  virtual DbSet<Expenses> Expenses { get; set; }
+        public  virtual DbSet<Expense> Expenses { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<FunctionalDepartment> FunctionalDepartments { get; set; }
         public virtual DbSet<ImageGallery> ImageGalleries { get; set; }
@@ -43,7 +45,7 @@ namespace REMCCG.Infrastructure.DataContexts
         public virtual DbSet<Remittance> Remittances { get; set; }
         public virtual DbSet<ServiceAssignment> ServiceAssignments { get; set; }
         public virtual DbSet<ServiceAttendance> ServiceAttendances { get; set; }
-        public virtual DbSet<UserActivities> UserActivities { get; set; }
+        public virtual DbSet<UserActivity> UserActivities { get; set; }
 
 
         #endregion
@@ -97,7 +99,7 @@ namespace REMCCG.Infrastructure.DataContexts
             modelBuilder.Entity<AttendanceRecord>().ToTable("AttendanceRecords");
             modelBuilder.Entity<Blogpost>().ToTable("BlogPosts");
             modelBuilder.Entity<Department>().ToTable("Departments");
-            modelBuilder.Entity<Expenses>().ToTable("Expenses");
+            modelBuilder.Entity<Expense>().ToTable("Expenses");
             modelBuilder.Entity<Report>().ToTable("Reports");
             modelBuilder.Entity<FunctionalDepartment>().ToTable("FunctionalDepartments");
             modelBuilder.Entity<ImageGallery>().ToTable("ImageGalleries");
@@ -107,7 +109,7 @@ namespace REMCCG.Infrastructure.DataContexts
             modelBuilder.Entity<Remittance>().ToTable("Remittances");
             modelBuilder.Entity<ServiceAssignment>().ToTable("ServiceAssignments");
             modelBuilder.Entity<ServiceAttendance>().ToTable("ServiceAttendances");
-            modelBuilder.Entity<UserActivities>().ToTable("UserActivities");
+            modelBuilder.Entity<UserActivity>().ToTable("UserActivities");
 
             OnModelCreatingPartial(modelBuilder);
         }

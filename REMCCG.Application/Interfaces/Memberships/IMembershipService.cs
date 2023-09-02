@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace REMCCG.Application.Common.DTOs
+namespace REMCCG.Application.Interfaces.Memberships
 {
-    public class UserActivitiesDTO
+    public interface IMembershipService
     {
     }
 }

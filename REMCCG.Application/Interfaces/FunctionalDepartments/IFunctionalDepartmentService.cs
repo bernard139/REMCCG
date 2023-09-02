@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.FunctionalDepartments
 {
-    public class IFunctionalDepartmentService
+    public interface IFunctionalDepartmentService
     {
     }
 }

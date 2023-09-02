@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace REMCCG.Application.Interfaces.UserActivities
+namespace REMCCG.Application.Implementations.UserActivities
 {
-    public class IUserActivitiesService
+    public class UserActivityService
     {
     }
 }

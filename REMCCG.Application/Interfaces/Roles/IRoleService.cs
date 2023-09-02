@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace REMCCG.Application.Implementations.Expenses
+namespace REMCCG.Application.Interfaces.Roles
 {
-    public class ExpensesService
+    public interface IRoleService : ICRUD<RoleDTO, RoleModel>
     {
+
     }
 }

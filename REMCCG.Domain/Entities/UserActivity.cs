@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Domain.Entities
 {
-    public class UserActivities
+    public class UserActivity
     {
         public string UserId { get; set; }
         public bool IsActivityResult { get; set; }

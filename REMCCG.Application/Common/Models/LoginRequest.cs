@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Common.Models
 {
-    public class BundleSettings
+    public class LoginRequest
     {
-        public string LanguageCode { get; set; }
-        public string DefaultMessage { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
 
     }
 }
-
