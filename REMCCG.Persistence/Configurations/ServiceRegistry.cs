@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using REMCCG.Application.Implementations.ImageGalleries;
 using REMCCG.Application.Services;
 
@@ -22,7 +24,14 @@ namespace REMCCG.Persistence.Configurations
             #endregion
 
             #region Other services
-            
+
+            services.AddHttpContextAccessor();
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             var conString = conf["ConnectionStrings:REMCCGDbContextConnection"];
             services.AddDbContext<IAppDbContext, REMCCGDbContext>(options => options.UseSqlServer(conString));
             services.AddDefaultIdentity<ApplicationUser>(opt => opt.SignIn.RequireConfirmedAccount = true)
