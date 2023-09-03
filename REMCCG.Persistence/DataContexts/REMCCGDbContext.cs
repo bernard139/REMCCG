@@ -28,8 +28,6 @@ namespace REMCCG.Infrastructure.DataContexts
         }
 
         #region Tables
-        public virtual DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
-        public virtual DbSet<Sessions> Sessions { get; set; }
         public virtual DbSet<ApplicationUser> Users { get; set; }
         public DbSet<ApplicationRole> Roles { get; set; }
         public virtual DbSet<AttendanceRecord> AttendanceRecords { get; set; }
@@ -39,7 +37,7 @@ namespace REMCCG.Infrastructure.DataContexts
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<FunctionalDepartment> FunctionalDepartments { get; set; }
         public virtual DbSet<ImageGallery> ImageGalleries { get; set; }
-        public virtual DbSet<ImageGalleryImage> imageGalleryImages { get; set; }
+        public virtual DbSet<ImageGalleryImage> ImageGalleryImages { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Membership> Memberships { get; set; }
         public virtual DbSet<Remittance> Remittances { get; set; }

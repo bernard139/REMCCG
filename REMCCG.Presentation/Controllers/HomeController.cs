@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using REMCCG.Presentation.Models;
+using REMCCG.Application.Common.Models;
 using System.Diagnostics;
 
 namespace REMCCG.Presentation.Controllers

@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Common.DTOs
 {
-    public class FunctionalDepartmentDTO
+    public class FunctionalDepartmentDTO : BaseObjectDTO
     {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class FunctionalDepartmentModel
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

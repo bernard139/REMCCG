@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "REMCCG.Infrastructure", "RE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "REMCCG.Domain", "REMCCG.Domain\REMCCG.Domain.csproj", "{58EF9036-169E-43F1-B07F-942A8DA42029}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REMCCG.Presentation", "REMCCG.Presentation\REMCCG.Presentation.csproj", "{5671C846-8F4B-405E-927B-B80ECF0DD4E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "REMCCG.Presentation", "REMCCG.Presentation\REMCCG.Presentation.csproj", "{5671C846-8F4B-405E-927B-B80ECF0DD4E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

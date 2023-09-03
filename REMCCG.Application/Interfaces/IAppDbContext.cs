@@ -8,8 +8,6 @@ namespace REMCCG.Application.Interfaces
     public interface IAppDbContext
     {
         #region Tables
-        DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
-        public DbSet<Sessions> Sessions { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<ApplicationRole> Roles { get; set; }
         public DbSet<AttendanceRecord> AttendanceRecords { get; set; }
@@ -19,7 +17,7 @@ namespace REMCCG.Application.Interfaces
         public DbSet<Report> Reports { get; set; }
         public DbSet<FunctionalDepartment> FunctionalDepartments { get; set; }
         public DbSet<ImageGallery> ImageGalleries { get; set; }
-        public DbSet<ImageGalleryImage> imageGalleryImages { get; set; }
+        public DbSet<ImageGalleryImage> ImageGalleryImages { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<Remittance> Remittances { get; set; }

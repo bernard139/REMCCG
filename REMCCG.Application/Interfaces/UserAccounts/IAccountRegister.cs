@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Identity;
 using REMCCG.Application.Common.Models;
 using System;
 using System.Collections.Generic;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.UserAccounts
 {
-    public interface IAccountLogout
+    public interface IAccountRegister
     {
-        Task LogoutAsync(HttpContext httpContext);
-
+        Task<IdentityResult> RegisterAsync(RegisterViewModel model);
     }
+
 }

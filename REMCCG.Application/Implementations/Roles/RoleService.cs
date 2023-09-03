@@ -1,147 +1,183 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Mapster;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Storage;
-using REMCCG.Application.Common.Constants.ErrorBuilds;
+using REMCCG.Application.Common.DTOs;
 using REMCCG.Application.Common.Models;
 using REMCCG.Application.Interfaces;
+using REMCCG.Application.Interfaces.Roles;
 using REMCCG.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace REMCCG.Application.Implementations.Roles
 {
-    public class RoleService : ResponseBaseService, IRoleService
+    public class RoleService : IRoleService
     {
-        private readonly IMessageProvider _messageProvider;
-        private readonly IHttpContextAccessor _httpContext;
         private readonly IAppDbContext _context;
-        private readonly string _language;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly IDbContextTransaction _trans;
-        public RoleService(IMessageProvider messageProvider, IHttpContextAccessor httpContext, RoleManager<ApplicationRole> roleManager, IAppDbContext context) : base(messageProvider)
-        {
-            _messageProvider = messageProvider ?? throw new ArgumentNullException(nameof(messageProvider));
-            _httpContext = httpContext ?? throw new ArgumentNullException(nameof(httpContext));
-            _language = _httpContext.HttpContext.Request.Headers[ResponseCodes.LANGUAGE];
-            _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-            _trans = _context.Begin();
 
+        public RoleService(IAppDbContext context, RoleManager<ApplicationRole> roleManager)
+        {
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
         }
 
         public async Task<ServerResponse<bool>> Create(RoleDTO request)
         {
             var response = new ServerResponse<bool>();
-            if (request.IsValid(out ValidationResponse source, _messageProvider, _language))
-            {
-                return SetError(response, ResponseCodes.INVALID_PARAMETER, _language);
 
-            }
-            IdentityResult result = await _roleManager.CreateAsync(new ApplicationRole { Name = request.RoleName, IsActive = true });
-            if (result.Succeeded)
+            try
             {
+                var newRole = request.Adapt<ApplicationRole>();
 
-                await _trans.CommitAsync();
-                response.IsSuccessful = true;
+                _context.Roles.Add(newRole);
+                int saveResult = await _context.SaveChangesAsync();
 
-                SetSuccess(response, true, ResponseCodes.SUCCESS, _language);
+                response.Data = saveResult > 0;
+                response.Error = response.Data ? "Role created successfully." : "Failed to create Role.";
             }
-            else
+            catch (Exception ex)
             {
-                await _trans.RollbackAsync();
-                SetError(response, ResponseCodes.REQUEST_NOT_SUCCESSFUL, _language);
+                response.Data = false;
+                response.Error = "An error occurred while creating the Role: " + ex.Message;
             }
-            return response;
 
-        }
-
-        public async Task<ServerResponse<bool>> Delete(object id)
-        {
-            string reqId = Convert.ToString(id);
-            var response = new ServerResponse<bool>();
-            if (string.IsNullOrWhiteSpace(reqId))
-            {
-                return SetError(response, ResponseCodes.INVALID_PARAMETER, _language);
-
-            }
-            var result = await _roleManager.FindByIdAsync(reqId);
-            if (result is null)
-            {
-                return SetError(response, ResponseCodes.INVALID_PARAMETER, _language);
-            }
-            result.IsDeleted = true;
-            _context.Roles.Update(result);
-            int save = await _context.SaveChangesAsync();
-            if (save > 0)
-            {
-                await _trans.CommitAsync();
-                response.IsSuccessful = true;
-                SetSuccess(response, true, ResponseCodes.SUCCESS, _language);
-            }
-            else
-            {
-                await _trans.RollbackAsync();
-                SetError(response, ResponseCodes.REQUEST_NOT_SUCCESSFUL, _language);
-            }
-            return response;
-
+            return await Save(response);
         }
 
         public async Task<ServerResponse<List<RoleModel>>> GetAllRecord()
         {
             var response = new ServerResponse<List<RoleModel>>();
-            var roles = await _context.GetData<ApplicationRole>("Exec [dbo].[SP_GetAlLRoles]");
-            response.IsSuccessful = true;
-            response.Data = roles?.AsQueryable().ProjectToType<RoleModel>().ToList();
-            return response;
 
+            try
+            {
+                var roles = await _context.GetData<ApplicationRole>("Exec [dbo].[SP_GetAlLRoles]");
+                response.IsSuccessful = true;
+                response.Data = roles?.AsQueryable().ProjectToType<RoleModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                response.Data = new List<RoleModel>();
+                response.IsSuccessful = false;
+                response.Error = "An error occurred while retrieving roles: " + ex.Message;
+            }
+
+            return response;
         }
 
         public async Task<ServerResponse<RoleModel>> GetRecordById(object id)
         {
             var response = new ServerResponse<RoleModel>();
-            var data = await _roleManager.FindByIdAsync(Convert.ToString(id));
-            var record = data?.Adapt<RoleModel>();
-            response.IsSuccessful = true;
-            response.Data = record;
+
+            try
+            {
+                var data = await _roleManager.FindByIdAsync(Convert.ToString(id));
+
+                if (data != null)
+                {
+                    var record = data.Adapt<RoleModel>();
+                    response.IsSuccessful = true;
+                    response.Data = record;
+                }
+                else
+                {
+                    response.IsSuccessful = false;
+                    response.Error = "Role not found.";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccessful = false;
+                response.Error = "An error occurred while retrieving the Role: " + ex.Message;
+            }
+
             return response;
-
         }
-
 
 
         public async Task<ServerResponse<bool>> Update(RoleDTO request)
         {
-
             var response = new ServerResponse<bool>();
-            if (!request.IsValid(out ValidationResponse source, _messageProvider, _language))
-            {
-                return SetError(response, source.Code, source.Message, _language);
 
-            }
-            var result = await _roleManager.FindByIdAsync(request.Id);
-            if (result is null)
+            try
             {
-                return SetError(response, ResponseCodes.INVALID_PARAMETER, _language);
+                var existingRole = await _context.Roles.FindAsync(request.Id);
+
+                if (existingRole == null)
+                {
+                    response.Data = false;
+                    response.Error = "Role not found.";
+                    return response;
+                }
+
+                existingRole.IsActive = request.IsActive;
+                existingRole.IsDeleted = request.IsDeleted;
+
+                int updateResult = await _context.SaveChangesAsync();
+
+                response.Data = updateResult > 0;
+                response.Error = response.Data ? "Role updated successfully." : "Failed to update Role.";
             }
-            result.Name = request.RoleName;
-            var identityResult = await _roleManager.UpdateAsync(result);
-            int save = await _context.SaveChangesAsync();
-            if (save > 0)
+            catch (Exception ex)
             {
-                await _trans.CommitAsync();
-                response.IsSuccessful = true;
-                SetSuccess(response, true, ResponseCodes.SUCCESS, _language);
+                response.Data = false;
+                response.Error = "An error occurred while updating the Role: " + ex.Message;
             }
-            else
+
+            return await Save(response);
+        }
+
+        public async Task<ServerResponse<bool>> Delete(object id)
+        {
+            var response = new ServerResponse<bool>();
+
+            try
             {
-                await _trans.RollbackAsync();
-                SetError(response, ResponseCodes.REQUEST_NOT_SUCCESSFUL, _language);
+                var existingRole = await _context.Roles.FindAsync(Convert.ToString(id));
+
+                if (existingRole == null)
+                {
+                    response.Data = false;
+                    response.Error = "Role not found.";
+                    return response;
+                }
+
+                _context.Roles.Remove(existingRole);
+                int deleteResult = await _context.SaveChangesAsync();
+
+                response.Data = deleteResult > 0;
+                response.Error = response.Data ? "Role deleted successfully." : "Failed to delete Role.";
             }
+            catch (Exception ex)
+            {
+                response.Data = false;
+                response.Error = "An error occurred while deleting the Role: " + ex.Message;
+            }
+
+            return await Save(response);
+        }
+
+        private async Task<ServerResponse<bool>> Save(ServerResponse<bool> response)
+        {
+            try
+            {
+                int saveResult = await _context.SaveChangesAsync();
+                if (saveResult > 0)
+                {
+                    response.Data = true;
+                    response.SuccessMessage = "Attendance record updated successfully.";
+                }
+                else
+                {
+                    response.Data = false;
+                    response.Error = "Failed to update attendance record.";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Data = false;
+                response.Error = "An error occurred while saving the attendance record: " + ex.Message;
+            }
+
             return response;
         }
-    }
+}
+
 }

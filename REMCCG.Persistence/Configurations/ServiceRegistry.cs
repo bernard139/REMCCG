@@ -1,4 +1,5 @@
 ﻿
+using REMCCG.Application.Implementations.ImageGalleries;
 using REMCCG.Application.Services;
 
 namespace REMCCG.Persistence.Configurations
@@ -27,19 +28,22 @@ namespace REMCCG.Persistence.Configurations
             services.AddDefaultIdentity<ApplicationUser>(opt => opt.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<REMCCGDbContext>()
-            //services.AddDefaultIdentity<ApplicationUser, ApplicationRole>(opt=>opt.SignIn.RequireConfirmedAccount=true).AddEntityFrameworkStores<VateBraSOPDbContext>()
                 .AddDefaultTokenProviders();
 
 
             services.AddScoped<UserManager<ApplicationUser>>();
             services.AddScoped<IAccountLogin, AccountLogin>();
 
+            //User services:
 
             services.AddScoped<IUserActivityService, UserActivityService>();
-            //services.AddScoped<IAccountLogout, AccountLogout>();
+            services.AddScoped<IAccountLogout, AccountLogout>();
+            services.AddScoped<IAccountRegister, AccountRegister>();
+            services.AddScoped<IUserService, UserService>();
+
+            //Other Services:
 
             services.AddScoped<IAppDbContext, REMCCGDbContext>();
-            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAttendanceRecordService, AttendanceRecordService>();
             services.AddScoped<IBlogPostService, BlogPostService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
@@ -50,10 +54,12 @@ namespace REMCCG.Persistence.Configurations
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<IImageGalleryService, ImageGalleryService>();
             services.AddScoped<IMemberService, MemberService>();
-            services.AddScoped<IMembershipService, MembershipService>()
+            services.AddScoped<IMembershipService, MembershipService>();
             services.AddScoped<IRemittanceService, RemittanceService>();
             services.AddScoped<IServiceAssignmentService, ServiceAssignmentService>();
             services.AddScoped<IServiceAttendanceService, ServiceAttendanceService>();
+
+            #endregion
 
 
             return services;

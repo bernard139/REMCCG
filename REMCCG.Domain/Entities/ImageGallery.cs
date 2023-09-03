@@ -11,7 +11,7 @@ namespace REMCCG.Domain.Entities
         public int ID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<ImageGalleryImage> Images { get; set; } // Collection of images in the gallery
+        public List<ImageGalleryImage> Images { get; set; }
     }
 
 }

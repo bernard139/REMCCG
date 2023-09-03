@@ -1,90 +1,63 @@
-﻿using System.Net;
-using REMCCG.Application.Common.Constants.ErrorBuilds;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using REMCCG.Application.Common.Models;
 using Newtonsoft.Json;
-using REMCCG.Application.Interfaces;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
-namespace REMCCG.Application.Common.Exceptions
+public class ExceptionHandlingMiddleware
 {
+    private readonly RequestDelegate _next;
+    private readonly ILogger<ExceptionHandlingMiddleware> _logger;
 
-    public class ExceptionHandlingMiddleware
+    public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+        _next = next;
+        _logger = logger;
+    }
 
-
-        public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
+    public async Task InvokeAsync(HttpContext context)
+    {
+        try
         {
-            _next = next;
-            _logger = logger;
+            await _next(context);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(exception, "An unhandled exception occurred.");
+            await HandleExceptionAsync(context, exception);
+        }
+    }
+
+    private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        context.Response.Clear();
+        context.Response.ContentType = "application/json";
+
+        var problemDetails = new ProblemDetails
+        {
+            Title = "An error occurred while processing your request.",
+            Status = (int)HttpStatusCode.InternalServerError,
+            Detail = exception.Message
+        };
+
+        if (exception is UnauthorizedAccessException)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+            problemDetails.Title = "Access denied.";
+        }
+        else if (exception is KeyNotFoundException)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            problemDetails.Title = "Resource not found.";
+        }
+        else
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
         }
 
-        public async Task InvokeAsync(HttpContext httpContext, IMessageProvider messageProvider)
-        {
-            try
-            {
-                await _next(httpContext);
-            }
-            catch (Exception ex)
-            {
-                await HandleExceptionAsync(httpContext, ex, messageProvider);
-            }
-        }
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception, IMessageProvider messageProvider)
-        {
-            var getLanguage = Convert.ToString(context.Request.Headers[ResponseCodes.LANGUAGE]);
-            context.Response.ContentType = "Application/json";
-            var response = context.Response;
-
-            var message = string.Empty;
-
-            var errorResponse = new ErrorResponse
-            {
-                ResponseDescription = messageProvider.GetMessage(ResponseCodes.EXCEPTION, getLanguage),
-                ResponseCode = ResponseCodes.EXCEPTION
-
-            };
-            CaseSwirching(exception, messageProvider, getLanguage, response, errorResponse);
-            var result = JsonConvert.SerializeObject(errorResponse);
-            await context.Response.WriteAsync(result);
-        }
-
-        private void CaseSwirching(Exception exception, IMessageProvider messageProvider, string getLanguage, HttpResponse response, ErrorResponse errorResponse)
-        {
-            switch (exception)
-            {
-                case ApplicationException ex:
-                    if (ex.Message.Contains("Invalid token"))
-                    {
-                        response.StatusCode = (int)HttpStatusCode.Forbidden;
-                        errorResponse.ResponseDescription = messageProvider.GetMessage(ResponseCodes.INVALID_TOKEN, getLanguage);
-                        errorResponse.ResponseCode = ResponseCodes.INVALID_TOKEN;
-                        _logger.LogError(ex, "Invalid token");
-                        break;
-                    }
-                    response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    errorResponse.ResponseDescription = messageProvider.GetMessage(ResponseCodes.BAD_REQUEST, getLanguage);
-                    errorResponse.ResponseCode = ResponseCodes.BAD_REQUEST;
-                    _logger.LogError(ex, "Bad request");
-                    break;
-                case KeyNotFoundException ex:
-                    response.StatusCode = (int)HttpStatusCode.NotFound;
-                    errorResponse.ResponseDescription = messageProvider.GetMessage(ResponseCodes.NOT_FOUND, getLanguage);
-                    errorResponse.ResponseCode = ResponseCodes.NOT_FOUND;
-                    _logger.LogError(ex, "Not found");
-                    break;
-
-
-                default:
-                    response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    errorResponse.ResponseDescription = messageProvider.GetMessage(ResponseCodes.EXCEPTION, getLanguage);
-                    errorResponse.ResponseCode = ResponseCodes.EXCEPTION;
-                    _logger.LogError("An error occurred");
-                    break;
-            }
-            _logger.LogError(exception.Message);
-        }
+        var result = JsonConvert.SerializeObject(problemDetails);
+        await context.Response.WriteAsync(result);
     }
 }
