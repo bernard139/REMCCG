@@ -13,7 +13,8 @@ namespace REMCCG.Domain.Entities
         public string Content { get; set; }
         public DateTime Date { get; set; }
         public int MemberID { get; set; }
-        public string ImagePath { get; set; } // Path to the associated image
+        public string ImagePath { get; set; }
+        public Member Member { get; set; }
     }
 }
 

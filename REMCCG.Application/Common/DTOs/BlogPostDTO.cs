@@ -14,8 +14,8 @@ namespace REMCCG.Application.Common.DTOs
             public string Content { get; set; }
             public DateTime Date { get; set; }
             public string ImagePath { get; set; }
-            public string AuthorId { get; set; }
-            public ApplicationUser Author { get; set; }
+            public string MemberID { get; set; }
+            public Member Member { get; set; }
 
     }
 
@@ -26,8 +26,8 @@ namespace REMCCG.Application.Common.DTOs
         public string Content { get; set; }
         public DateTime Date { get; set; }
         public string ImagePath { get; set; }
-        public string AuthorId { get; set; }
-        public ApplicationUser Author { get; set; }
+        public string MemberID { get; set; }
+        public Member Member { get; set; }
 
     }
 }

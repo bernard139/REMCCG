@@ -93,9 +93,8 @@ namespace REMCCG.Infrastructure.DataContexts
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ApplicationUser>().ToTable("Users");
-            modelBuilder.Entity<AttendanceRecord>().ToTable("AttendanceRecords");
-            modelBuilder.Entity<Blogpost>().ToTable("BlogPosts");
+            modelBuilder.Entity<AttendanceRecord>().ToTable("AttendanceRecords").HasKey(ar => ar.ID);
+            modelBuilder.Entity<Blogpost>().ToTable("BlogPosts").HasKey(b => b.ID);
             modelBuilder.Entity<Department>().ToTable("Departments");
             modelBuilder.Entity<Expense>().ToTable("Expenses");
             modelBuilder.Entity<Report>().ToTable("Reports");
@@ -108,6 +107,77 @@ namespace REMCCG.Infrastructure.DataContexts
             modelBuilder.Entity<ServiceAssignment>().ToTable("ServiceAssignments");
             modelBuilder.Entity<ServiceAttendance>().ToTable("ServiceAttendances");
             modelBuilder.Entity<UserActivity>().ToTable("UserActivities");
+
+            modelBuilder.Entity<ApplicationUser>(entity =>
+            {
+
+                entity.HasKey(e => e.Id);
+
+                entity.ToTable("Users");
+
+            });
+
+            modelBuilder.Entity<AttendanceRecord>()
+                .HasOne(ar => ar.AttendanceEvent)
+                .WithMany(ae => ae.AttendanceRecords)
+                .HasForeignKey(ar => ar.AttendanceEventID)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<AttendanceRecord>()
+                .HasOne(ar => ar.Member)
+                .WithMany(m => m.AttendanceRecords)
+                .HasForeignKey(ar => ar.MemberID)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+            modelBuilder.Entity<Blogpost>()
+                .ToTable("BlogPosts")
+                .HasKey(b => b.ID); // Define the primary key for Blogpost
+
+            modelBuilder.Entity<Blogpost>()
+                .HasOne(b => b.Member)
+                .WithMany(m => m.Blogpost)
+                .HasForeignKey(b => b.MemberID);
+
+            modelBuilder.Entity<Report>()
+                .ToTable("Reports")
+                .HasOne(r => r.Member)
+                .WithMany(u => u.Reports)
+                .HasForeignKey(r => r.MemberID);
+
+            modelBuilder.Entity<ImageGalleryImage>()
+                .ToTable("ImageGalleryImages")
+                .HasOne(igi => igi.Gallery)
+                .WithMany(ig => ig.Images)
+                .HasForeignKey(igi => igi.GalleryID);
+
+            modelBuilder.Entity<Member>()
+                .ToTable("Members")
+                .HasKey(m => m.ID);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .ToTable("Users")
+                .HasKey(u => u.Id);
+
+
+            modelBuilder.Entity<Membership>()
+                .ToTable("Memberships")
+                .HasOne(m => m.Member)
+                .WithMany(me => me.Memberships)
+                .HasForeignKey(m => m.MemberID);
+
+            modelBuilder.Entity<Remittance>()
+                .ToTable("Remittances")
+                .HasOne(r => r.Member)
+                .WithMany(u => u.Remittances)
+                .HasForeignKey(r => r.MemberID);
+
+            modelBuilder.Entity<ServiceAttendance>()
+                .ToTable("ServiceAttendances")
+                .HasOne(sa => sa.Member)
+                .WithMany(u => u.ServiceAttendances)
+                .HasForeignKey(sa => sa.MemberID);
+
 
             OnModelCreatingPartial(modelBuilder);
         }

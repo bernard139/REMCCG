@@ -7,5 +7,6 @@
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
         public int MemberID { get; set; }
+        public Member Member { get; set; }
     }
 }

@@ -112,11 +112,9 @@ namespace REMCCG.Application.Services
                 }
                 else
                 {
-                    existingPost.Title = request.Title;
-                    existingPost.Content = request.Content;
-                    existingPost.Date = request.Date;
-                    existingPost.ImagePath = request.ImagePath;
-                    existingPost.AuthorId = request.AuthorId;
+
+                    var update = request.Adapt<Blogpost>();
+                    _context.BlogPosts.Add(update);
 
                     int updateResult = await _context.SaveChangesAsync();
 

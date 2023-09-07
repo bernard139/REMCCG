@@ -148,13 +148,9 @@ namespace REMCCG.Application.Implementations.AttendanceRecords
                     return response;
                 }
 
-                existingRecord.AttendanceEventID = request.AttendanceEventID;
-                existingRecord.MemberID = request.MemberID;
-                existingRecord.AttendedMen = request.AttendedMen;
-                existingRecord.AttendedWomen = request.AttendedWomen;
-                existingRecord.AttendedChildren = request.AttendedChildren;
-                existingRecord.AttendedGuests = request.AttendedGuests;
-                existingRecord.IsPastEvent = request.IsPastEvent;
+                var update = request.Adapt<AttendanceRecord>();
+
+                _context.AttendanceRecords.Add(update);
 
                 int updateResult = await _context.SaveChangesAsync();
 

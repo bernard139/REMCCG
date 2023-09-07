@@ -12,7 +12,7 @@ using REMCCG.Infrastructure.DataContexts;
 namespace REMCCG.Infrastructure.Migrations
 {
     [DbContext(typeof(REMCCGDbContext))]
-    [Migration("20230903213414_Initial")]
+    [Migration("20230907130627_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -98,9 +98,6 @@ namespace REMCCG.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -151,7 +148,6 @@ namespace REMCCG.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
@@ -311,10 +307,6 @@ namespace REMCCG.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("AuthorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -326,13 +318,16 @@ namespace REMCCG.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MemberID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("MemberID");
 
                     b.ToTable("BlogPosts", (string)null);
                 });
@@ -445,16 +440,15 @@ namespace REMCCG.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactDetails")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DOB")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("DepartmentID")
                         .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -464,7 +458,11 @@ namespace REMCCG.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Occupation")
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -592,6 +590,9 @@ namespace REMCCG.Infrastructure.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MemberID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -600,6 +601,8 @@ namespace REMCCG.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("MemberID");
 
                     b.ToTable("ServiceAttendances", (string)null);
                 });
@@ -680,13 +683,13 @@ namespace REMCCG.Infrastructure.Migrations
                     b.HasOne("REMCCG.Domain.Entities.ServiceAttendance", "AttendanceEvent")
                         .WithMany("AttendanceRecords")
                         .HasForeignKey("AttendanceEventID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("REMCCG.Domain.Entities.Member", "Member")
                         .WithMany("AttendanceRecords")
                         .HasForeignKey("MemberID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("AttendanceEvent");
@@ -696,13 +699,13 @@ namespace REMCCG.Infrastructure.Migrations
 
             modelBuilder.Entity("REMCCG.Domain.Entities.Blogpost", b =>
                 {
-                    b.HasOne("REMCCG.Domain.Entities.ApplicationUser", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
+                    b.HasOne("REMCCG.Domain.Entities.Member", "Member")
+                        .WithMany("Blogpost")
+                        .HasForeignKey("MemberID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
+                    b.Navigation("Member");
                 });
 
             modelBuilder.Entity("REMCCG.Domain.Entities.ImageGalleryImage", b =>
@@ -730,7 +733,7 @@ namespace REMCCG.Infrastructure.Migrations
             modelBuilder.Entity("REMCCG.Domain.Entities.Membership", b =>
                 {
                     b.HasOne("REMCCG.Domain.Entities.Member", "Member")
-                        .WithMany()
+                        .WithMany("Memberships")
                         .HasForeignKey("MemberID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -740,20 +743,24 @@ namespace REMCCG.Infrastructure.Migrations
 
             modelBuilder.Entity("REMCCG.Domain.Entities.Remittance", b =>
                 {
-                    b.HasOne("REMCCG.Domain.Entities.Member", null)
+                    b.HasOne("REMCCG.Domain.Entities.Member", "Member")
                         .WithMany("Remittances")
                         .HasForeignKey("MemberID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Member");
                 });
 
             modelBuilder.Entity("REMCCG.Domain.Entities.Report", b =>
                 {
-                    b.HasOne("REMCCG.Domain.Entities.Member", null)
+                    b.HasOne("REMCCG.Domain.Entities.Member", "Member")
                         .WithMany("Reports")
                         .HasForeignKey("MemberID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Member");
                 });
 
             modelBuilder.Entity("REMCCG.Domain.Entities.ServiceAssignment", b =>
@@ -775,6 +782,17 @@ namespace REMCCG.Infrastructure.Migrations
                     b.Navigation("Leader");
                 });
 
+            modelBuilder.Entity("REMCCG.Domain.Entities.ServiceAttendance", b =>
+                {
+                    b.HasOne("REMCCG.Domain.Entities.Member", "Member")
+                        .WithMany("ServiceAttendances")
+                        .HasForeignKey("MemberID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Member");
+                });
+
             modelBuilder.Entity("REMCCG.Domain.Entities.Department", b =>
                 {
                     b.Navigation("Members");
@@ -789,9 +807,15 @@ namespace REMCCG.Infrastructure.Migrations
                 {
                     b.Navigation("AttendanceRecords");
 
+                    b.Navigation("Blogpost");
+
+                    b.Navigation("Memberships");
+
                     b.Navigation("Remittances");
 
                     b.Navigation("Reports");
+
+                    b.Navigation("ServiceAttendances");
                 });
 
             modelBuilder.Entity("REMCCG.Domain.Entities.ServiceAttendance", b =>

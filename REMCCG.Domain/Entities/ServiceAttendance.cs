@@ -13,5 +13,8 @@ namespace REMCCG.Domain.Entities
         public DateTime Date { get; set; }
         public int TotalAttendance { get; set; }
         public ICollection<AttendanceRecord> AttendanceRecords { get; set; }
+
+        public int MemberID { get; set; }
+        public Member Member { get; set; }
     }
 }

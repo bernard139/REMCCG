@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using REMCCG.Application.Common.Models;
 using REMCCG.Application.Interfaces.UserAccounts;
 using REMCCG.Domain.Entities;
@@ -23,6 +24,7 @@ namespace REMCCG.Application.Implementations.UserAccount
         public async Task<IdentityResult> RegisterAsync(RegisterViewModel model)
         {
             var user = model.Adapt<ApplicationUser>();
+            user.UserName = model.Email;
 
             var result = await _userManager.CreateAsync(user, model.Password);
 

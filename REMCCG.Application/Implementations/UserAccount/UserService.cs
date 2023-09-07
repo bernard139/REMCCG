@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Storage;
 using REMCCG.Application.Common.Constants.ErrorBuilds;
 using REMCCG.Application.Common.DTOs;
 using REMCCG.Application.Common.Models;
 using REMCCG.Application.Interfaces;
+using REMCCG.Application.Interfaces.Members;
 using REMCCG.Application.Interfaces.UserAccounts;
 using REMCCG.Domain.Entities;
 using System;
@@ -23,13 +25,15 @@ namespace REMCCG.Application.Implementations.UserAccount
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IAppDbContext _context;
         private readonly IDbContextTransaction _trans;
+        private readonly IMemberService MemberService;
 
 
         public UserService(
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
             IAppDbContext context,
-            RoleManager<ApplicationRole> roleManager)
+            RoleManager<ApplicationRole> roleManager,
+            IMemberService MemberService)
         {
 
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
@@ -73,10 +77,9 @@ namespace REMCCG.Application.Implementations.UserAccount
                 return response;
             }
 
-            user.DOB = request.DOB;
-            user.FirstName = request.FirstName;
-            user.LastName = request.LastName;
-            user.PhoneNumber = request.PhoneNumber;
+            var updateUser = request.Adapt<ApplicationUser>();
+
+            _context.Users.Add(updateUser);
 
             var success = await _userManager.UpdateAsync(user);
 

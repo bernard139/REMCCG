@@ -107,9 +107,9 @@ namespace REMCCG.Application.Implementations.Members
 
                 existingMember.FirstName = request.FirstName;
                 existingMember.LastName = request.LastName;
-                existingMember.Address = request.Address;
-                existingMember.Occupation = request.Occupation;
-                existingMember.ContactDetails = request.ContactDetails;
+                existingMember.Email = request.Email;
+                existingMember.PhoneNumber = request.PhoneNumber;
+                existingMember.DOB = request.DOB;
                 existingMember.DepartmentID = request.DepartmentID;
 
                 int updateResult = await _context.SaveChangesAsync();

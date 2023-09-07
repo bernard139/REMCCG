@@ -96,9 +96,10 @@ namespace REMCCG.Application.Implementations.ServiceAttendances
                     return response;
                 }
 
-                existingServiceAttendance.Name = request.Name;
-                existingServiceAttendance.Date = request.Date;
-                existingServiceAttendance.TotalAttendance = request.TotalAttendance;
+
+                var updateServiceAttendance = request.Adapt<ServiceAttendance>();
+
+                _context.ServiceAttendances.Add(updateServiceAttendance);
 
                 int updateResult = await _context.SaveChangesAsync();
 
