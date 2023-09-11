@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.Expenses
 {
-    public interface IExpenseService : ICRUD<ExpenseDTO, ExpenseModel>
+    public interface IExpenseService:ICRUD<ExpenseDTO, ExpenseModel>
     {
     }
 }

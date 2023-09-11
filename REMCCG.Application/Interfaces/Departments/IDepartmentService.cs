@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace REMCCG.Application.Interfaces.Departments
 {
-    public interface IDepartmentService : ICRUD<DepartmentDTO, DepartmentModel>
+    public interface IDepartmentService:ICRUD<DepartmentDTO, DepartmentModel>
     {
     }
 }
