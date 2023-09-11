@@ -51,7 +51,7 @@ namespace REMCCG.Application.Implementations.ImageGalleries
 
             try
             {
-                var data = await _context.GetData<ImageGalleryImageModel>("Exec [dbo].[SP_GetImage]");
+                var data = await _context.GetData<ImageGalleryImageModel>("Exec [dbo].[SP_GetImagefromgallery]");
                 response.Data = data;
                 response.IsSuccessful = true;
             }
@@ -71,7 +71,7 @@ namespace REMCCG.Application.Implementations.ImageGalleries
 
             try
             {
-                var data = await _context.GetData<ImageGalleryImageModel>("exec [dbo].[SP_GetImageId]", new SqlParameter("@id", id));
+                var data = await _context.GetData<ImageGalleryImageModel>("exec [dbo].[SP_GetImagefromgalleryId]", new SqlParameter("@id", id));
 
                 response.IsSuccessful = true;
                 response.Data = data?.FirstOrDefault();

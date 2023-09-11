@@ -48,7 +48,7 @@ namespace REMCCG.Application.Implementations.Roles
 
             try
             {
-                var roles = await _context.GetData<ApplicationRole>("Exec [dbo].[SP_GetAlLRoles]");
+                var roles = await _context.GetData<ApplicationRole>("Exec [dbo].[SP_GetAllRoles]");
                 response.IsSuccessful = true;
                 response.Data = roles?.AsQueryable().ProjectToType<RoleModel>().ToList();
             }
