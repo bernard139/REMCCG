@@ -48,19 +48,19 @@ namespace REMCCG.Application.Implementations.Memberships
             return await Save(response);
         }
 
-            public async Task<ServerResponse<List<AttendanceRecordModel>>> GetAllRecord()
+            public async Task<ServerResponse<List<MembershipModel>>> GetAllRecord()
             {
-                var response = new ServerResponse<List<AttendanceRecordModel>>();
+                var response = new ServerResponse<List<MembershipModel>>();
 
                 try
                 {
-                var data = await _context.GetData<AttendanceRecordModel>("Exec [dbo].[SP_GetMembership]");
+                var data = await _context.GetData<MembershipModel>("Exec [dbo].[SP_GetMembership]");
                     response.Data = data;
                     response.IsSuccessful = true;
                 }
                 catch (Exception ex)
                 {
-                    response.Data = new List<AttendanceRecordModel>();
+                    response.Data = new List<MembershipModel>();
                     response.IsSuccessful = false;
                     response.Error = "An error occurred while retrieving membership: " + ex.Message;
                 }

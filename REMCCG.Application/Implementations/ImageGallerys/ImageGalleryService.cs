@@ -126,6 +126,36 @@ namespace REMCCG.Application.Implementations.ImageGallerys
             return await Save(response);
         }
 
+        public async Task<ServerResponse<bool>> Delete(object id)
+        {
+            var response = new ServerResponse<bool>();
+
+            try
+            {
+                var existingImageGallery = await _context.ImageGalleries.FindAsync(id);
+
+                if (existingImageGallery == null)
+                {
+                    response.Data = false;
+                    response.Error = "Image Gallery not found.";
+                    return response;
+                }
+
+                _context.ImageGalleries.Remove(existingImageGallery);
+                int deleteResult = await _context.SaveChangesAsync();
+
+                response.Data = deleteResult > 0;
+                response.Error = response.Data ? "Image Gallery deleted successfully." : "Failed to delete image gallery.";
+            }
+            catch (Exception ex)
+            {
+                response.Data = false;
+                response.Error = "An error occurred while deleting the image gallery: " + ex.Message;
+            }
+
+            return await Save(response);
+        }
+
         private async Task<ServerResponse<bool>> Save(ServerResponse<bool> response)
         {
             try
