@@ -32,7 +32,7 @@ namespace REMCCG.Application.Implementations.UserAccount
             var user = await _userManager.FindByNameAsync(model.Email);
             if (user != null)
             {
-                var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
                     _httpContextAccessor.HttpContext.Session.SetString("UserId", user.Id);

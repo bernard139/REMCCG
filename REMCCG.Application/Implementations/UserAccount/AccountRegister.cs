@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using REMCCG.Application.Common.Models;
 using REMCCG.Application.Interfaces.UserAccounts;
 using REMCCG.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace REMCCG.Application.Implementations.UserAccount
 {
-
     public class AccountRegister : IAccountRegister
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -36,5 +36,4 @@ namespace REMCCG.Application.Implementations.UserAccount
             return result;
         }
     }
-
 }

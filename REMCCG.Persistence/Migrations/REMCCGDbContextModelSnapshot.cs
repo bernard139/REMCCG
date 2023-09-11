@@ -170,7 +170,7 @@ namespace REMCCG.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("REMCCG.Domain.Entities.ApplicationUserClaim", b =>

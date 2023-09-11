@@ -28,8 +28,6 @@ namespace REMCCG.Infrastructure.DataContexts
         }
 
         #region Tables
-        public virtual DbSet<ApplicationUser> Users { get; set; }
-        public DbSet<ApplicationRole> Roles { get; set; }
         public virtual DbSet<AttendanceRecord> AttendanceRecords { get; set; }
         public virtual DbSet<Blogpost> BlogPosts { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
@@ -90,6 +88,7 @@ namespace REMCCG.Infrastructure.DataContexts
         #endregion
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 
+        
         {
             base.OnModelCreating(modelBuilder);
 
@@ -107,15 +106,6 @@ namespace REMCCG.Infrastructure.DataContexts
             modelBuilder.Entity<ServiceAssignment>().ToTable("ServiceAssignments");
             modelBuilder.Entity<ServiceAttendance>().ToTable("ServiceAttendances");
             modelBuilder.Entity<UserActivity>().ToTable("UserActivities");
-
-            modelBuilder.Entity<ApplicationUser>(entity =>
-            {
-
-                entity.HasKey(e => e.Id);
-
-                entity.ToTable("Users");
-
-            });
 
             modelBuilder.Entity<AttendanceRecord>()
                 .HasOne(ar => ar.AttendanceEvent)
@@ -154,10 +144,6 @@ namespace REMCCG.Infrastructure.DataContexts
             modelBuilder.Entity<Member>()
                 .ToTable("Members")
                 .HasKey(m => m.ID);
-
-            modelBuilder.Entity<ApplicationUser>()
-                .ToTable("Users")
-                .HasKey(u => u.Id);
 
 
             modelBuilder.Entity<Membership>()

@@ -66,7 +66,7 @@ namespace YourNamespace.Controllers
                 if (loggedIn)
                 {
 
-                    return RedirectToAction("Index", "Home"); // Redirect to the home page
+                    return RedirectToAction("Dashboard", "Home"); // Redirect to the home page
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt");

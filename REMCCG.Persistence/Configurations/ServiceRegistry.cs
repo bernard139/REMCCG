@@ -34,7 +34,7 @@ namespace REMCCG.Persistence.Configurations
 
             var conString = conf["ConnectionStrings:REMCCGDbContextConnection"];
             services.AddDbContext<IAppDbContext, REMCCGDbContext>(options => options.UseSqlServer(conString));
-            services.AddDefaultIdentity<ApplicationUser>(opt => opt.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(/*opt => opt.SignIn.RequireConfirmedAccount = true*/)
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<REMCCGDbContext>()
                 .AddDefaultTokenProviders();
