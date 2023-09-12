@@ -1,0 +1,15 @@
+﻿@using System.Security.Claims;
+@{
+    ViewData["Title"] = "User";
+    Layout = "~/Views/Shared/_userindexLayout.cshtml";
+}
+
+
+<main>
+    <h1>Welcome, @User.FindFirstValue(ClaimTypes.Name)!</h1>
+    <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+    </p>
+</main>

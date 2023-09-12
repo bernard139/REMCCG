@@ -37,7 +37,7 @@ namespace YourNamespace.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("UserIndex", "User");
                 }
 
                 foreach (var error in result.Errors)
@@ -66,7 +66,7 @@ namespace YourNamespace.Controllers
                 if (loggedIn)
                 {
 
-                    return RedirectToAction("Dashboard", "Home"); // Redirect to the home page
+                    return RedirectToAction("UserIndex", "User"); // Redirect to the home page
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt");
@@ -75,15 +75,15 @@ namespace YourNamespace.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             // Call your LogoutAsync service method here
             await _accountLogout.LogoutAsync(HttpContext);
 
             // Redirect to a page after logout
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Dashboard", "Home");
         }
     }
 }
