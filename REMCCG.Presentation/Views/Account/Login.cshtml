@@ -1,25 +1,52 @@
 ﻿@model REMCCG.Application.Common.Models.LoginRequest
 @{
     ViewData["Title"] = "Login";
-    Layout = "~/Views/Shared/_accountLayout.cshtml";
+    Layout = "~/Views/Shared/_loginLayout.cshtml";
 }
 
-<body>
-    <h2>Login</h2>
-    <form method="post">
-        <div class="errors" asp-validation-summary="All"></div>
-        <div>
-            <label for="Email">Email:</label>
-            <input asp-for="Email" type="email" id="Email" name="Email" required />
-        </div>
-        <div>
-            <label for="Password">Password:</label>
-            <input asp-for="Password" type="password" id="Password" name="Password" required />
-        </div>
-        <div>
-            <label for="RememberMe">Remember Me:</label>
-            <input asp-for="RememberMe" />
-        </div>
-        <button type="submit">Login</button>
-    </form>
-</body>
+<div class="login">
+    <div class="login-form">
+        <h1>Sign In</h1>
+        <br>
+        <form method="post">
+            <div class="errors" asp-validation-summary="All"></div>
+
+            <div class="form-group">
+                <div class="icon"><i class="fas fa-envelope"></i></div>
+                <input asp-for="Email" id="username" autocomplete="off" placeholder="Email Address" autocomplete="off" required />
+            </div>
+
+            <div class="form-group">
+                <div class="icon"><i class="fas fa-lock"></i></div>
+                <input asp-for="Password" id="password" autocomplete="new-password" placeholder="Password" autocomplete="off" required />
+            </div>
+
+            <div class="y">
+                <div class="Rme">
+                    <label asp-for="RememberMe">
+                        <input asp-for="RememberMe" />
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
+                </div>
+
+                <div class="forgot-password">
+                    <p>Forgot password?</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Login" />
+            </div>
+
+            <div class="end">
+                <p>Don't have an account? <a asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a></p>
+                <p>Or Sign In with:</p>
+            </div>
+
+            <div class="google">
+                <p><i class="fab fa-google fa-2x" style="color: #dd4b39;"></i>   GOOGLE</p>
+            </div>
+
+        </form>
+    </div>
+</div>

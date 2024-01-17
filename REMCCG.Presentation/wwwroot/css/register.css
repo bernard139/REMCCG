@@ -1,0 +1,245 @@
+﻿html {
+    font-size: 10px;
+}
+
+@media (min-width: 926px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 1.6rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(to top, rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.8)), url("../Images/CMS-1.jpg");
+}
+
+button {
+    display: none;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*REGISTER*/
+
+.register {
+    margin: 0 auto; 
+    height: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: 'Fenix', serif;
+    width: 100vw; 
+    max-width: 600px; 
+}
+
+.register-form {
+    background-color: whitesmoke; /* 0.5 represents 50% opacity */
+    padding: 2.0rem 5.0rem 2.0rem 5.0rem;
+    border-radius: 20px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.register p {
+    color: black;
+    margin-bottom: 10px;
+}
+.register h1 {
+    color: black;
+    font-size: 3.0rem;
+    margin-bottom: 10px;
+}
+.form-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.0rem;
+    color: black;
+}
+
+.end {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.0rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: black;
+}
+
+.icon {
+    color: goldenrod;
+    font-size: 1.3rem;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #027c04;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 275px;
+    margin-bottom: 10px;
+}
+
+    input[type="submit"]:hover {
+        background-color: goldenrod;
+    }
+
+ul.list-inline.justify-content-end {
+    justify-content: flex-end;
+}
+
+.y {
+    display: flex;
+    justify-content: space-between;
+    gap: 4.8rem;
+}
+
+.Rme {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.forgot-password {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    flex: 1;
+}
+
+
+.google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 2px;
+    width: 20vw;
+    transition: 1s;
+}
+
+    .google i {
+        font-size: 2.0rem;
+    }
+
+    .google p {
+        align-items: center;
+        font-size: 1.0rem;
+    }
+
+.errors {
+    color: red;
+    font-size: 1.0rem;
+}
+
+@media only screen and (max-width: 926px) {
+
+    /* Adjustments for smaller screens */
+    body {
+        justify-content: flex-start; /* Align content to the top for smaller screens */
+        min-height: fit-content;
+    }
+
+    .register {
+        margin: 0; /* Remove horizontal margin for smaller screens */
+    }
+
+    .register-form {
+        width: 90%; /* Adjust the width of the form for smaller screens */
+    }
+    .register p {
+        color: black;
+        font-size: 1.7rem;
+        margin-bottom: 10px;
+    }
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 1.7rem;
+        color: black;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        border-radius: 5px;
+        color: black;
+    }
+    .google {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2px;
+        width: 20vw;
+        transition: 1s;
+    }
+
+        .google i {
+            font-size: 3.0rem;
+        }
+
+        .google p {
+            align-items: center;
+            font-size: 2.0rem;
+        }
+    .icon {
+        color: goldenrod;
+        font-size: 1.5rem;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+}

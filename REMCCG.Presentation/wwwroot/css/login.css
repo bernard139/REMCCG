@@ -1,0 +1,216 @@
+﻿html {
+    font-size: 12px;
+}
+
+@media (min-width: 926px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 1.6rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(to top,rgba(4,9,30,0.8), rgba(4,9,30,0.5)), url("../Images/john-price-RAZQiZOX3mU-unsplash.jpg");
+}
+
+button {
+    display: none;
+}
+
+.menu {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+
+.login {
+    margin: 0 auto;
+    position: relative;
+    background-position: center;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-repeat: no-repeat;
+    font-family: 'Fenix', serif;
+    overflow-y: auto;
+}
+
+.login-form {
+    background-color: whitesmoke; /* 0.5 represents 50% opacity */
+    padding: 2.0rem 4.0rem 2.0rem 4.0rem;
+    border-radius: 20px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.login p {
+    margin-bottom: 10px;
+    color: black;
+}
+.login h1 {
+    color: black;
+    font-size: 3.0rem;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.0rem;
+    color: black;
+}
+
+.end {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.0rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid black;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: black;
+}
+
+    input[type="text"]:-webkit-autofill,
+    input[type="password"]:-webkit-autofill,
+    input[type="email"]:-webkit-autofill {
+        background-color: transparent !important; /* Make the background color transparent */
+    }
+
+.icon {
+    color: goldenrod;
+    font-size: 1.3rem;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+
+input[type="submit"] {
+    background-color: #027c04;
+    color: black;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 275px;
+    margin-bottom: 10px;
+}
+
+    input[type="submit"]:hover {
+        background-color: forestgreen;
+    }
+
+ul.list-inline.justify-content-end {
+    justify-content: flex-end;
+}
+
+.y {
+    display: flex;
+    justify-content: space-between;
+    gap: 4.8rem;
+}
+
+.Rme {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.forgot-password {
+    font-weight: bold;
+    font-size: 1.0rem;
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    width: 20vw;
+    transition: 1s;
+}
+
+    .google i {
+        font-size: 1.5rem;
+    }
+
+    .google p {
+        align-items: center;
+        font-size: 1.0rem;
+    }
+
+.errors {
+    color: red;
+    font-size: 1.0rem;
+}
+
+@media only screen and (max-width: 926px) {
+    body {
+        justify-content: flex-start; /* Align content to the top for smaller screens */
+        min-height: fit-content;
+    }
+
+    .login {
+        margin: 0; /* Remove horizontal margin for smaller screens */
+    }
+
+    .login-form {
+        width: 90%; /* Adjust the width of the form for smaller screens */
+    }
+    input[type="text"],
+    input[type="password"], 
+    input[type="email"] {
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid black;
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        color: black;
+        font-size: 2.0rem;
+    }
+}
