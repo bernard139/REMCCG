@@ -24,7 +24,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: linear-gradient(to top, rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.8)), url("../Images/CMS-1.jpg");
+    background-image: linear-gradient(to top, rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.8)), url("../Images/regiter.jpg");
 }
 
 button {

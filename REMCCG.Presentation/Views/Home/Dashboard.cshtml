@@ -8,7 +8,7 @@
         <div class="notes">
             <h1 class="display-4">Church Management System</h1>
             <p>Explore and manage remittances for your church.</p>
-        <h2><a class="button" asp-controller="Account" asp-action="Register">Get Started</a></h2>
+            <h2><a class="button" asp-controller="Account" asp-action="Register">Get Started</a></h2>
         </div>
         <div class="sidepic">
             <img src="~/Images/11-Best-Church-Management-Software-Options-removebg.png" alt="ImageNotFound" />
@@ -20,3 +20,21 @@
         </div>
     </section>
 </div>
+<script>
+
+    const toggleNavBtn = document.getElementById("menu-toggle");
+    const closeNavBtn = document.getElementById("close-menu");
+    const nav = document.querySelector(".menu");
+
+    toggleNavBtn.addEventListener("click", function () {
+        nav.classList.toggle("show-menu");
+        nav.classList.toggle("hide-menu");
+    });
+
+    closeNavBtn.addEventListener("click", function () {
+        nav.classList.toggle("show-menu");
+        nav.classList.toggle("hide-menu");
+    });
+
+
+</script>

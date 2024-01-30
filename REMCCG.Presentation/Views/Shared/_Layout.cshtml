@@ -6,13 +6,17 @@
     <title>@ViewData["Title"] - CMS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="js/script.js"></script>
 </head>
 <body>
     <header>
         <div class="title">
             <img src="~/Images/logo_cms-removebg-preview.png" alt="" />
         </div>
+        <button id="menu-toggle"><i class="fa fa-bars"></i></button>
         <div class="menu">
+            <button id="close-menu"><i class="fa fa-times"></i></button>
             <nav>
                 <ul class="navbar">
                     <li><a asp-area="" asp-controller="Home" asp-action="Dashboard">Home</a></li>
@@ -36,12 +40,6 @@
             @RenderBody()
         </main>
     </div>
-
-    @*<footer>
-        <div>
-            &copy; 2023 - CMS
-        </div>
-    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

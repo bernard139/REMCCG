@@ -2,7 +2,7 @@
     font-size: 10px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 976px) {
     html {
         font-size: 16px;
     }
@@ -22,6 +22,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     animation: slideshow 60s infinite linear;
+    overflow: hidden;
     background-image: linear-gradient(to top,rgba(4,9,30,0.9), rgba(4,9,30,0.7)), url("../Images/daniel-tseng-QCjC1KpA4nA-unsplash.jpg");
 }
 
@@ -32,6 +33,9 @@ header {
     align-items: center;
     height: 8vh;
     width: 100%;
+}
+button {
+    display: none;
 }
 
 .title {
@@ -178,7 +182,7 @@ nav ul li:hover::after {
     }
 
     .notes p {
-        color: #858585;
+        color: goldenrod;
     }
 
 .button {
@@ -207,4 +211,157 @@ footer {
     padding: 0.1em;
     width: 100%;
     height: 2vh;
+}
+@media only screen and (max-width: 976px) {
+
+    button {
+        display: flex;
+        color: goldenrod;
+    }
+
+    header {
+        background-color: transparent;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        width: 100%;
+        z-index: 3;
+    }
+
+
+    #menu-toggle {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 2.8rem;
+        margin: 0;
+        padding: 0;
+    }
+    #close-menu {
+        position: absolute;
+        background-color: transparent;
+        top: 30px;
+        left: 10px;
+        font-size: 5.8rem;
+        border: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .show-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: -2vh;
+        right: -6vw;
+        height: 100vh;
+        width: 30vw;
+        align-items: center;
+        z-index: 2;
+        background-color: darkgreen;
+        padding-top: 60px;
+        transform: translateX(30vw);
+        transition: transform 3s ease-in-out;
+    }
+    .menu.show-menu {
+        transform: translateX(0);
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+    .login-register {
+        display: flex;
+        align-items: center;
+    }
+
+        .login-register li:nth-child(2) a {
+            padding: 12px; /* add some padding to separate the border from the text */
+            border-radius: 4.0rem;
+            background-color: darkgoldenrod;
+            margin: 0px;
+            color: white;
+        }
+
+            .login-register li:nth-child(2) a:hover {
+                background-color: goldenrod;
+            }
+
+        .login-register li:nth-child(2)::after {
+            display: none;
+        }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        margin: 1.0rem 0;
+    }
+
+    nav li {
+        margin: 0.5rem 0;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: white;
+        font-size: 1.6rem;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+    nav li a:hover {
+        color: white;
+    }
+    .login-register li.register {
+        border-left: none;
+        padding: 10px;
+    }
+
+
+    nav {
+        font-size: 1.2rem;
+    }
+    .sidepic img {
+        border-radius: 3.0rem;
+        height: 80vh;
+        position: relative;
+        top: 50px;
+    }
+    .notes {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        height: 40vh;
+        width: 90vw;
+        padding: 20px;
+        font-size: 1.6rem;
+        z-index: 2;
+    }
+
+        .notes h1 {
+            font-size: 6.0rem;
+            font-family: 'Times New Roman';
+        }
+
+        .notes h2 {
+            text-align: center;
+        }
+
+        .notes p {
+            color: goldenrod;
+        }
 }

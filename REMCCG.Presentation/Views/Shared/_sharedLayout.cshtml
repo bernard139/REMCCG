@@ -1,0 +1,70 @@
+﻿@using System.Security.Claims;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CMS - Index</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/shared.css" asp-append-version="true" />
+
+</head>
+<body>
+    <div class="sidebar">
+        <div class="title">
+            <img src="~/Images/logo_cms-removebg-preview.png" alt="" />
+        </div>
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a asp-area="" asp-controller="AttendanceRecord" asp-action="Index">Attendance Records</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="BlogPost" asp-action="Index">Blog Posts</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Department" asp-action="Index">Departments</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Expense" asp-action="Index">Expenses</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="FunctionalDepartment" asp-action="Index">Functional Departments</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="ImageGallery" asp-action="Index">Image Galleries</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Member" asp-action="Index">Members</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Membership" asp-action="Index">Memberships</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Remittance" asp-action="Index">Remittances</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Report" asp-action="Index">Reports</a>
+                </li>
+                <!-- Add more navigation links as needed -->
+            </ul>
+            <ul>
+                <li>
+                    <a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Styles", required: false)
+</body>
+</html>
