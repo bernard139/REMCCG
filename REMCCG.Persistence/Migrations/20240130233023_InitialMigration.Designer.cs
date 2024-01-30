@@ -12,8 +12,8 @@ using REMCCG.Infrastructure.DataContexts;
 namespace REMCCG.Infrastructure.Migrations
 {
     [DbContext(typeof(REMCCGDbContext))]
-    [Migration("20230911083550_Initial")]
-    partial class Initial
+    [Migration("20240130233023_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
